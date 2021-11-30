@@ -12,6 +12,10 @@ export class DisplayComponent implements OnInit {
 
   @Input() hero: Map<string, Map<string, number>> = new Map();
 
+  pipe: boolean = false;
+  crystalys: boolean = false;
+  daedalus: boolean = false;
+
   PhysicalEHP: number;
   MagicalEHP: number;
 
@@ -53,7 +57,13 @@ export class DisplayComponent implements OnInit {
     /* Every hero has 25% base MR */
     MR += ((1-((this.hero.get("Stats")?.get("Base MR") || 25) * 0.01)) * (1 - ((this.hero.get("Items")?.get("MR") || 0) * 0.01)));
   
-    this.MagicalEHP = Math.trunc((Health / MR) * 1000)/1000;
+    let mhp = Math.trunc((Health / MR) * 1000)/1000;
+    if (this.pipe) { 
+      mhp += 400; 
+    }
+
+    this.MagicalEHP = mhp;
+    
     /************/
     /* End EHP */
     /***********/
@@ -96,6 +106,12 @@ export class DisplayComponent implements OnInit {
 
     DPS = dmg * APS;
 
+    if (this.daedalus) {
+      DPS += DPS * 0.3 * 2.25
+    } else if (this.crystalys) {
+      DPS += DPS * 0.3 * 1.6;
+    }
+
     this.Damage = Math.trunc((dmg || 0) * 1000)/1000;
     this.APS = Math.trunc((APS || 0) * 1000)/1000;
     this.DPS = Math.trunc((DPS || 0) * 1000)/1000;
@@ -105,5 +121,24 @@ export class DisplayComponent implements OnInit {
     /**************/
 
   } 
+
+  toggle(targ: string) {
+    
+    switch (targ) {
+      case "pipe":
+        this.pipe = !this.pipe
+        break;
+      case "crystalys":
+        this.crystalys = !this.crystalys
+        if (this.daedalus) this.daedalus = false;
+        break;
+      case "daedalus":
+        this.daedalus = !this.daedalus
+        if (this.crystalys) this.crystalys = false;
+        break;
+    }
+
+    this.ngOnChanges();
+  }
 
 }

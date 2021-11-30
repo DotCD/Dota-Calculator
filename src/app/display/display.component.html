@@ -1,4 +1,12 @@
 <main>
+    <div id="toggles">
+        <label for="pipe">Pipe Active</label>
+        <input type="checkbox" name="pipe" id="pipe" (change)="toggle('pipe')">,
+        <label for="crystalys">Crystalys passive</label>
+        <input type="checkbox" name="crystalys" id="crystalys" [checked]="crystalys" (change)="toggle('crystalys')">,
+        <label for="daedalus">Daedalus passive</label>
+        <input type="checkbox" name="daedalus" id="daedalus" [checked]="daedalus" (change)="toggle('daedalus')">
+    </div>
     <div id="data">
         <p>Physical EHP: {{PhysicalEHP}},</p>
         <p>Magical EHP: {{MagicalEHP}},</p>
