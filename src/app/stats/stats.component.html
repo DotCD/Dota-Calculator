@@ -6,7 +6,7 @@
             class="stat"
             *ngFor="let stat of stats; let i = index">
             <p>{{stat}}</p>
-            <input type="number" [placeholder]="stat == 'Base MR' ? 25 : 0" (input)="update($event, true, i)">
+            <input type="number" [placeholder]="stat == 'Base MR' ? 25 : 0" [step]="(stat=='BAT') ? 0.1 : 1" (input)="update($event, true, i)">
             </div>
         </div>
         <div id="prim">

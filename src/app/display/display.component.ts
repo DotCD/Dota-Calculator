@@ -47,12 +47,13 @@ export class DisplayComponent implements OnInit {
     Armor += (this.hero.get("Stats")?.get("Agi") || 0) * 0.167;
     Armor += (this.hero.get("Items")?.get("Agi") || 0) * 0.167;
 
-    this.PhysicalEHP = Health / (1 - (((0.06 * Armor)/(1 + (0.06 * Armor))) + ((this.hero.get("Items")?.get("Evasion") || 0) / 100)));
+     let php = Health / (1 - (((0.06 * Armor)/(1 + (0.06 * Armor))) + ((this.hero.get("Items")?.get("Evasion") || 0) / 100)));
+    this.PhysicalEHP = Math.trunc((php) * 1000)/1000;
 
     /* Every hero has 25% base MR */
     MR += ((1-((this.hero.get("Stats")?.get("Base MR") || 25) * 0.01)) * (1 - ((this.hero.get("Items")?.get("MR") || 0) * 0.01)));
   
-    this.MagicalEHP = Health / MR;
+    this.MagicalEHP = Math.trunc((Health / MR) * 1000)/1000;
     /************/
     /* End EHP */
     /***********/
@@ -95,7 +96,7 @@ export class DisplayComponent implements OnInit {
 
     DPS = dmg * APS;
 
-    this.Damage = dmg || 0;
+    this.Damage = Math.trunc((dmg || 0) * 1000)/1000;
     this.APS = Math.trunc((APS || 0) * 1000)/1000;
     this.DPS = Math.trunc((DPS || 0) * 1000)/1000;
 
