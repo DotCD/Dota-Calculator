@@ -1,0 +1,32 @@
+<main>
+    <div>
+        <h2>Stats</h2>
+        <div id="stats">
+            <div
+            class="stat"
+            *ngFor="let stat of stats; let i = index">
+            <p>{{stat}}</p>
+            <input type="number" [placeholder]="stat == 'Base MR' ? 25 : 0" (input)="update($event, true, i)">
+            </div>
+        </div>
+        <div id="prim">
+            <label for="primary-attribute">Primary Attribute: </label>
+            <select name="primary-attribute" (input)="updatePrimary($event)">
+                <option value=0>Agi</option>
+                <option value=1>Str</option>
+                <option value=2>Int</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <h2>Items</h2>
+        <div id="items">
+            <div
+            class="stat"
+            *ngFor="let stat of items; let i = index">
+            <p>{{stat}}</p>
+            <input type="number" placeholder=0  (input)="update($event, false, i)">
+            </div>
+        </div>
+    </div>
+</main>
