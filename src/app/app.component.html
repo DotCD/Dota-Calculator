@@ -3,8 +3,8 @@
         <input type="checkbox" name="Advanced" (change)="advanced = !advanced">
         <label for="Advanced"> Advanced mode</label>
     </div>
-    <app-stats *ngIf="advanced" (updateEmitter)="updateHero($event)"></app-stats>
-    <app-simple-stats *ngIf="!advanced" (updateEmitter)="updateHero($event)"></app-simple-stats>
+    <app-stats class="fading" *ngIf="advanced" (updateEmitter)="updateHero($event)"></app-stats>
+    <app-simple-stats class="fading" *ngIf="!advanced" (updateEmitter)="updateHero($event)"></app-simple-stats>
     <app-display [hero]="hero"></app-display>
 </main>
 <router-outlet></router-outlet>
