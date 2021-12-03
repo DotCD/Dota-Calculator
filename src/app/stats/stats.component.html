@@ -3,8 +3,9 @@
         <h2>Stats</h2>
         <div id="stats">
             <div
-            class="stat"
-            *ngFor="let stat of stats; let i = index">
+            class="stat fading"
+            *ngFor="let stat of stats; let i = index"
+            [ngStyle]="{'animation-delay':  i * 150 + 'ms'}">
             <p>{{stat}}</p>
             <input type="number" [placeholder]="stat == 'Base MR' ? 25 : 0" [step]="(stat=='BAT') ? 0.1 : 1" (input)="update($event, true, i)">
             </div>
@@ -22,8 +23,9 @@
         <h2>Items</h2>
         <div id="items">
             <div
-            class="stat"
-            *ngFor="let stat of items; let i = index">
+            class="stat fading"
+            *ngFor="let stat of items; let i = index"
+            [ngStyle]="{'animation-delay':  i * 150 + 'ms'}">
             <p>{{stat}}</p>
             <input type="number" placeholder=0  (input)="update($event, false, i)">
             </div>
